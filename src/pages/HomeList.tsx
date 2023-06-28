@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Entity from "../entities/entities";
 
 
-export default function HomePage() {
+export default function HomePage({ navigation }) {
     const [SearchResult, setSearchResults] = useState('');
     const [User, setUsers] = useState([]);
 
@@ -25,7 +25,7 @@ export default function HomePage() {
                     id: result.id,
                     name: result.name,
                     avatar: result.avatar_url,
-                    repos:result.repos_url,
+                    repos: result.repos_url,
 
 
                 }])
@@ -60,15 +60,22 @@ export default function HomePage() {
             </View>
 
             <FlatList
+
+
                 renderItem={({ item }) => (
+
+                    <TouchableHighlight onPress={() => navigation.navigate('DetailsPerfil', item)}>  
                     <View style={styles.card}>
-                        <Image style={styles.img} source={{ uri:item.avatar}} />
+                        <Image style={styles.img} source={{ uri: item.avatar }} />
                         <View style={styles.positionText}>
                             <Text style={styles.textCard}>{item.name}</Text>
                         </View>
                     </View>
+                    </TouchableHighlight>
+
+
                 )}
-    
+
                 data={User}
                 keyExtractor={(item) => item.id}
             />
@@ -80,34 +87,37 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'flex-start',
-        backgroundColor: 'blue',
+        backgroundColor: 'white',
         paddingTop: 20,
     },
     card: {
         width: '90%',
-        aspectRatio: 5,
+        aspectRatio: 5.5,
         marginTop: 20,
-        backgroundColor: '',
+        backgroundColor: '#cddfcd',
         justifyContent: 'flex-start',
         flexDirection: 'row',
         margin: 10,
         shadowColor: '#000',
         elevation: 15,
-        borderRadius: 10,
-        marginHorizontal: 20
+        borderRadius: 20,
+        marginHorizontal: 20,
+        
+        
+        
     },
     Pesquisa: {
-        width: '80%',
-        aspectRatio: 6,
-        backgroundColor: '#CFD0D6',
+        width: '90%',
+        aspectRatio: 7,
+        backgroundColor: '#c3dfd7',
         justifyContent: 'flex-start',
         flexDirection: 'row',
-        margin: 60,
+        margin: 40,
         shadowColor: '#000',
         elevation: 15,
         borderRadius: 40,
-        paddingHorizontal: 30,
-        marginHorizontal: 40,
+        paddingHorizontal: 65,
+        marginHorizontal: 20,
         marginTop: 50,
         alignItems: 'center'
     },
@@ -116,27 +126,61 @@ const styles = StyleSheet.create({
         height: 50,
         marginHorizontal: 20,
         marginRight: 40,
-        marginTop: 15,
-        borderRadius:25,
+        marginTop: 7,
+        borderRadius: 25,    
     },
     title: {
         fontSize: 20,
         fontWeight: '400',
     },
     textCard: {
-        fontSize: 15,
-        fontWeight: '600'
+        fontSize: 20,
+        fontWeight: '600',
+        marginHorizontal:20,
+        
     },
     positionText: {
-        marginTop: 25
+        marginTop: 20
     },
     botao: {
         marginHorizontal: 60,
         height: 40,
         width: 50,
-        backgroundColor: 'white',
-       borderRadius:45,
+        backgroundColor: '#88d1ca',
+        borderRadius: 45,
         alignItems: 'center',
-        justifyContent:'center',
+        justifyContent: 'center',
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
