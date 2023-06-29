@@ -6,6 +6,7 @@ import Entity from "../entities/entities";
 import Repositorios from "../entities/repositorios";
 
 export default function DetailsPerfil({ route, navigation }) {
+
     const [searchRepos, setSearchRepos] = useState('');
     const [team, setTeam] = useState<Repositorios[]>([]);
     const [filteredTeam, setFilteredTeam] = useState<Repositorios[]>([]);
@@ -43,11 +44,12 @@ export default function DetailsPerfil({ route, navigation }) {
                         private: item.private,
                         fullName: item.full_name,
                         watchers: item.watchers,
-                        gitUrl: item.gitUrl,
+                        gitUrl: item.git_url,
                         forks: item.forks,
                         language: item.language,
-                        defaultBranch: item.defaultBranch,
-                        createdAt: item.createdAt,
+                        defaultBranch: item.default_branch,
+                        createdAt: item.created_at,
+                        description:item.description
                     });
                 });
                 setTeam(teamList);
@@ -57,49 +59,63 @@ export default function DetailsPerfil({ route, navigation }) {
     }, []);
 
     return (
-        <View style={styles.container}>
-            <View style={styles.card}>
-                <Image style={styles.img} source={avatar } />
-                <View style={styles.positionText}>
-                    <Text style={styles.textCard}>{name}</Text>
-                </View>
-            </View>
-            <View style={styles.Pesquisa}>
-                <TextInput
-                    style={styles.title}
-                    onChangeText={setSearchRepos}
-                    value={searchRepos}
-                    placeholder="pesquisar usuário"
-                />
-                <TouchableHighlight
-                    style={styles.botao}
-                    onPress={handleSearch}
-                >
-                    <Ionicons name="ios-search-sharp" size={20} color="#191970" />
-                </TouchableHighlight>
-                <TouchableHighlight
-                    style={styles.clearButton}
-                    onPress={handleClear}
-                >
-                    <Ionicons name="ios-close" size={20} color="#191970" />
-                </TouchableHighlight>
-            </View>
-
-            <FlatList
-                ListEmptyComponent={() => (
-                    <Text style={styles.noResultsText}>Nenhum resultado encontrado</Text>
-                )}
-                renderItem={({ item }) => (
-                    <View style={styles.card}>
+     
+                    <View style={styles.container}>
+                    <View style={styles.card}> 
+                    
+                        <Image style={styles.img} source={avatar} />
                         <View style={styles.positionText}>
-                            <Text style={styles.textCard}>{item.name}</Text>
+                            <Text style={styles.textCard}>{name}</Text>
                         </View>
-                    </View>
-                )}
-                data={filteredTeam}
-                keyExtractor={(item) => item.id.toString()}
-            />
+               
         </View>
+        <View style={styles.Pesquisa}>
+            <TextInput
+                style={styles.title}
+                onChangeText={setSearchRepos}
+                value={searchRepos}
+                placeholder="pesquisar usuário"
+            />
+            <TouchableHighlight
+
+                style={styles.botao}
+                onPress={handleSearch}
+            >
+                <Ionicons name="ios-search-sharp" size={20} color="#191970" />
+            </TouchableHighlight>
+            <TouchableHighlight
+
+                style={styles.clearButton}
+                onPress={handleClear}
+            >
+                <Ionicons name="ios-close" size={20} color="#191970" />
+
+            </TouchableHighlight>
+        </View>
+
+        <FlatList
+            ListEmptyComponent={() => (
+                <Text style={styles.noResultsText}>Nenhum resultado encontrado</Text>
+            )}
+            renderItem={({ item }) => (
+                <TouchableHighlight
+                       onPress={() => navigation.navigate('fullNamePage', item)}>
+                <View style={styles.card}>
+                    <View style={styles.positionText}>
+                        <Text style={styles.textCard}>{item.name}</Text>
+                    </View>
+                </View>
+                </TouchableHighlight>
+
+
+            )}
+            data={filteredTeam}
+            keyExtractor={(item) => item.id.toString()}
+        />
+
+
+
+    </View>
     );
 }
 
@@ -112,28 +128,29 @@ const styles = StyleSheet.create({
     },
     card: {
         width: '90%',
-        aspectRatio: 5,
+        aspectRatio: 5.5,
         marginTop: 20,
-        backgroundColor: '',
+        backgroundColor: '#cddfcd',
         justifyContent: 'flex-start',
         flexDirection: 'row',
-        margin: 10,
+        margin: 5,
+        shadowColor: '#000',
         elevation: 15,
-        borderRadius: 10,
-        marginHorizontal: 20
+        borderRadius: 20,
+        marginHorizontal: 20,
     },
     Pesquisa: {
-        width: '80%',
-        aspectRatio: 6,
-        backgroundColor: '#CFD0D6',
+        width: '90%',
+        aspectRatio: 7,
+        backgroundColor: '#c3dfd7',
         justifyContent: 'flex-start',
         flexDirection: 'row',
-        margin: 60,
+        margin: 30,
         shadowColor: '#000',
         elevation: 15,
         borderRadius: 40,
-        paddingHorizontal: 30,
-        marginHorizontal: 40,
+        paddingHorizontal: 65,
+        marginHorizontal: 20,
         marginTop: 50,
         alignItems: 'center'
     },
@@ -142,37 +159,40 @@ const styles = StyleSheet.create({
         height: 50,
         marginHorizontal: 20,
         marginRight: 40,
-        marginTop: 15,
-        borderRadius: 25,
+        marginTop: 7,
+        borderRadius: 25,  
     },
     title: {
         flex: 1,
-        fontSize: 20,
+        fontSize: 17,
         fontWeight: '400',
+        
     },
     textCard: {
-        fontSize: 15,
-        fontWeight: '600'
+        fontSize: 20,
+        fontWeight: '600',
+        marginHorizontal:20,
+        marginTop: -5
     },
     positionText: {
         marginTop: 25
     },
     botao: {
-        height: 40,
-        width: 50,
-        backgroundColor: 'white',
+        height: 30,
+        width: 30,
         borderRadius: 45,
         alignItems: 'center',
         justifyContent: 'center',
-        marginRight: 10,
+        marginRight:7
+       
     },
     clearButton: {
-        height: 40,
-        width: 50,
-        backgroundColor: 'white',
+        height: 30,
+        width: 30,
         borderRadius: 45,
         alignItems: 'center',
         justifyContent: 'center',
+        marginRight:-50
     },
     noResultsText: {
         textAlign: 'center',

@@ -3,6 +3,7 @@ import HomeList from "./src/pages/HomeList";
    import { NavigationContainer } from '@react-navigation/native';
 import Perfil from "./src/pages/Perfil";
 import DetailsPerfil from "./src/pages/Perfil";
+import fullNamePage from "./src/pages/fullName";
 
 export default function App() {  
 
@@ -19,11 +20,55 @@ export default function App() {
            <NavigationContainer>
            <Stack.Navigator>
              
-             <Stack.Screen name="HomeList" component={HomeList} />
-             <Stack.Screen name="DetailsPerfil" component={DetailsPerfil} />
+           <Stack.Screen name="HomeList" component={HomeList} 
+             options={{
+              title: 'Home',
+              headerStyle: {
+                backgroundColor: '#92b395',
+                
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+                
+              },
+            }}
+             />
+             <Stack.Screen name="DetailsPerfil" component={DetailsPerfil}
+             options={{
+              title: 'Repositories',
+              headerStyle: {
+                backgroundColor: '#92b395',
+                
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+                
+              },
+            }}
+             />
+             <Stack.Screen name="fullNamePage" component={fullNamePage} 
+               options={{
+                title: 'Repositorio',
+                headerStyle: {
+                  backgroundColor: '#92b395',
+                  
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                  
+                },
+              }}
+             
+             />
+             
             
            </Stack.Navigator>
          </NavigationContainer>
+
+
     
        );
    
