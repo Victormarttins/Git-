@@ -74,7 +74,7 @@ export default function DetailsPerfil({ route, navigation }) {
                 style={styles.title}
                 onChangeText={setSearchRepos}
                 value={searchRepos}
-                placeholder="pesquisar usuário"
+                placeholder="Pesquisar repositorio"
             />
             <TouchableHighlight
 
